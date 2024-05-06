@@ -27,12 +27,24 @@ class GameBoard:
         else:
             return False
 
-    def make_move_uci(self, move_str):
+    def update_board_uci(self, move_str):
         if not self.is_legal_move_uci(move_str):
             print("That is not a legal move")
-            return
+            return False
 
         move = chess.Move.from_uci(move_str)
         self.game_board.push(move)
         if self.visualize:
             self.display_board.update_board(self.fen())
+        return True
+
+    def make_player_move(self, player):
+        successful = False
+        while not successful:
+            player_move = player.make_move_uci(self.fen())
+            successful = self.update_board_uci(player_move)
+
+    def play_game(self, white, black):
+        while True:
+            self.make_player_move(white)
+            self.make_player_move(black)

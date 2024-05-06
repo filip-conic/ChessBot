@@ -1,7 +1,8 @@
 import gameBoard
+from Players import StockfishPlayer, UserPlayer
 
 gameBoard = gameBoard.GameBoard()
+white = StockfishPlayer.StockfishPlayer()
+black = UserPlayer.UserPlayer()
 
-while True:
-    userIn = input("Input a move: ")
-    gameBoard.make_move_uci(userIn)
+gameBoard.play_game(white, black)
