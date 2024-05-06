@@ -3,16 +3,12 @@ import pygameDisplay
 
 DEFAULT_START_POSITION = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 
-
 class GameBoard:
 
-    def __init__(self, visualize=True):
+    def __init__(self, visualizer):
         self.game_board = chess.Board()
         self.to_move = "white"
-        self.visualize = visualize
-        if self.visualize:
-            self.display_board = pygameDisplay.PygameDisplayBoard(
-                'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
+        self.visualizer = visualizer
 
     def fen(self):
         return self.game_board.fen()
@@ -34,8 +30,7 @@ class GameBoard:
 
         move = chess.Move.from_uci(move_str)
         self.game_board.push(move)
-        if self.visualize:
-            self.display_board.update_board(self.fen())
+        self.visualizer.update_board(self.fen())
         return True
 
     def make_player_move(self, player):

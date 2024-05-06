@@ -1,11 +1,12 @@
+from Visualizers.VisualizerInterface import VisualizerInterface
 from chessboard import display
 
-class PygameDisplayBoard:
-    # Start position is given in FEN notation
-    def __init__(self, startPosition):
+class PygameVisualizer(VisualizerInterface):
+
+    def __init__(self, start_fen):
         self.displayBoard = display.start()
         try:
-            display.update(startPosition, self.displayBoard)
+            display.update(start_fen, self.displayBoard)
         except Exception as e:
             print("Invalid Fen, Exception: " + str(e))
 
