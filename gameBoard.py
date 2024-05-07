@@ -1,5 +1,5 @@
 import chess
-import pygameDisplay
+import copy
 
 DEFAULT_START_POSITION = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 
@@ -7,7 +7,7 @@ class GameBoard:
 
     def __init__(self, visualizer):
         self.game_board = chess.Board()
-        self.to_move = "white"
+        self.to_move = chess.WHITE
         self.visualizer = visualizer
 
     def fen(self):
@@ -36,7 +36,8 @@ class GameBoard:
     def make_player_move(self, player):
         successful = False
         while not successful:
-            player_move = player.make_move_uci(self.fen())
+            player_move = player.make_move_uci(copy.deepcopy(self.game_board), self.to_move)
+            self.to_move = chess.BLACK if self.to_move == chess.WHITE else chess.WHITE
             successful = self.update_board_uci(player_move)
 
     def play_game(self, white, black):
