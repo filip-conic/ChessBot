@@ -1,5 +1,5 @@
 import chess
-from ChessEngine2.PieceTables import *
+from ChessEngine.PieceTables import *
 
 def evaluate_position(board):
     wp = len(board.pieces(chess.PAWN, chess.WHITE))
