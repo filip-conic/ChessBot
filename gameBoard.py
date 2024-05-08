@@ -2,11 +2,12 @@ import chess
 import copy
 
 DEFAULT_START_POSITION = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+TEST_FEN ='rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2'
 
 class GameBoard:
 
-    def __init__(self, visualizer):
-        self.game_board = chess.Board()
+    def __init__(self, visualizer, start_fen):
+        self.game_board = chess.Board(start_fen)
         self.to_move = chess.WHITE
         self.visualizer = visualizer
 
